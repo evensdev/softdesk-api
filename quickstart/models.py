@@ -11,3 +11,7 @@ class UserProfile(models.Model):
 class Contributor(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+class Project(models.Model):
+    name = models.CharField(max_length=200)
+    contributors = models.ManyToManyField(User, through='Contributor')
