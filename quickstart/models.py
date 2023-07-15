@@ -37,3 +37,9 @@ class Issue(models.Model):
     priority = models.CharField(max_length=6, choices=PRIORITY_CHOICES, default='LOW')
     tag = models.CharField(max_length=12, choices=TAG_CHOICES, default='TASK')
     assignee = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+
+    class Comment(models.Model):
+        issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
+        author = models.ForeignKey(User, on_delete=models.CASCADE)
+        content = models.TextField()
