@@ -8,3 +8,6 @@ class UserProfile(models.Model):
     consent_choice = models.BooleanField(default=False)
 
 
+class Contributor(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
