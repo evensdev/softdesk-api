@@ -8,13 +8,14 @@ class UserProfile(models.Model):
     consent_choice = models.BooleanField(default=False)
 
 
-class Contributor(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-
 class Project(models.Model):
     name = models.CharField(max_length=200)
     contributors = models.ManyToManyField(User, through='Contributor')
+
+
+class Contributor(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
 
 class Issue(models.Model):
@@ -38,8 +39,7 @@ class Issue(models.Model):
     tag = models.CharField(max_length=12, choices=TAG_CHOICES, default='TASK')
     assignee = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
-
-    class Comment(models.Model):
-        issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
-        author = models.ForeignKey(User, on_delete=models.CASCADE)
-        content = models.TextField()
+class Comment(models.Model):
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
