@@ -5,7 +5,7 @@ from .models import User, Contributor, Project, Issue, Comment
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'age', 'consent']
+        fields = ['id', 'username', 'age', 'can_be_contacted', 'can_data_be_shared']
 
 
 class ContributorSerializer(serializers.ModelSerializer):
