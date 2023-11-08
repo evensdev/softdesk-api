@@ -2,10 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class User(models.Model):
+    username = models.OneToOneField(User, on_delete=models.CASCADE)
     age = models.PositiveIntegerField(null=True, blank=True)
-    consent_choice = models.BooleanField(default=False)
+    can_be_contacted = models.BooleanField(default=False)
+    can_data_be_shared = models.BooleanField(default=False)
 
 
 class Project(models.Model):
@@ -38,6 +39,7 @@ class Issue(models.Model):
     priority = models.CharField(max_length=6, choices=PRIORITY_CHOICES, default='LOW')
     tag = models.CharField(max_length=12, choices=TAG_CHOICES, default='TASK')
     assignee = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
 
 class Comment(models.Model):
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
